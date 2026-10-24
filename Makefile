@@ -49,7 +49,10 @@ CORE_PRODUCT_NAME=hiddify-core
 CORE_NAME=hiddify-lib
 LIB_NAME=hiddify-core
 
-ifeq ($(CHANNEL),prod)
+# Kia VPN: CORE_CHANNEL lets CI pick the core build that matches this app source
+# (the app on main tracks hiddify-core's rolling "draft" release, not core.version).
+CORE_CHANNEL ?= $(CHANNEL)
+ifeq ($(CORE_CHANNEL),prod)
 	CORE_URL=https://github.com/hiddify/hiddify-core/releases/download/v$(core.version)
 else
 	CORE_URL=https://github.com/hiddify/hiddify-core/releases/download/draft

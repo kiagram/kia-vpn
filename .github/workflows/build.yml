@@ -19,6 +19,9 @@ on:
 env:
   IS_GITHUB_ACTIONS: 1
   CHANNEL: "${{ inputs.channel }}"
+  # The app source on main needs the matching (rolling) hiddify-core "draft" libs;
+  # core.version (4.1.0) is too old for the current Android/desktop bindings.
+  CORE_CHANNEL: "dev"
   FLUTTER_VERSION: '3.38.5'
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"
   TAG_NAME: "${{ inputs.tag-name }}"

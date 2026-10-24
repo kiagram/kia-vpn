@@ -243,7 +243,8 @@ class IntroPage extends HookConsumerWidget with PresLogger {
       case "TR":
         return RegionLocale(Region.tr, AppLocale.tr);
       default:
-        return RegionLocale(Region.other, AppLocale.en);
+        // Kia VPN: Iran-friendly default (Iranian sites go direct)
+        return RegionLocale(Region.ir, AppLocale.en);
     }
   }
 }

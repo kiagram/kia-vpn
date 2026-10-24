@@ -1,26 +1,10 @@
 name: CI
+# Kia VPN: run manually (Actions -> CI -> Run workflow). Releases are built by release.yml on v* tags.
 on:
-  # pull_request:
-  #   paths-ignore:
-  #     - '**.md'
-  #     - 'docs/**'
-  #     - 'test.configs/**'
-  #     - '.vscode/'
-  #     - 'appcast.xml'
-  push:
-    branches:
-       - main
-       - dev
-       - android-fix-action-bug
-       - new-design-v2 
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - '.vscode/'
-      - 'appcast.xml'
+  workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +12,5 @@ jobs:
     uses: ./.github/workflows/build.yml
     secrets: inherit
     permissions: write-all
-    if: "${{!contains(github.event.head_commit.message, 'release: version')}}"
     with:
-      upload-artifact: ${{ github.event_name == 'push' }}
-      
+      upload-artifact: true

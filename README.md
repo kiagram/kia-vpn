@@ -1,3 +1,66 @@
+<p align="center"><img src="assets/images/source/kia_vpn_icon_1024.png" width="128" alt="Kia VPN icon"/></p>
+
+# Kia VPN
+
+**Kia VPN** is a personal, non-commercial, rebranded build of the open-source
+[**Hiddify app**](https://github.com/hiddify/hiddify-app) — a multi-platform proxy/VPN client
+built on [sing-box](https://github.com/SagerNet/sing-box). All of the real work belongs to the
+Hiddify team; this fork only changes branding and a few defaults.
+
+- **Upstream / credit:** [hiddify/hiddify-app](https://github.com/hiddify/hiddify-app) by the Hiddify team
+- **License:** GPLv3 with Hiddify's extended terms — see [LICENSE.md](LICENSE.md)
+  ([original license](https://github.com/hiddify/hiddify-app/blob/main/LICENSE.md)). Kia VPN is free and non-commercial.
+- **Downloads:** [Releases](https://github.com/kiagram/kia-vpn/releases) — Windows (installer / portable zip),
+  Android (APK), macOS (DMG / PKG, unsigned). All binaries are built by GitHub Actions from this repo.
+
+### How to use
+1. Install the app for your platform from [Releases](https://github.com/kiagram/kia-vpn/releases).
+   - macOS: the app is unsigned — right-click **KiaVPN.app → Open** the first time.
+2. Copy your **private subscription link** (you get it from whoever runs your server), then in the app tap
+   **+** → **Add from clipboard** (or **Scan QR code**).
+3. Tap **Connect**. The app tests all servers in the subscription and automatically picks the working,
+   fastest route (auto / url-test selection). Iranian websites go direct (region = Iran).
+
+No server, subscription link or key is shipped in this app or repository — you always add your own.
+
+### Changes compared to Hiddify
+- App name and branding changed to **Kia VPN** (Android, Windows, macOS, window titles, app strings,
+  English/Persian translations); new "shield + K" icon set and "Ki" in-app mark (`scripts/kia_icons.py`).
+- New app IDs so it installs alongside Hiddify: Android `tech.kiarash.kiavpn`, macOS `tech.kiarash.kiavpn`,
+  Windows `KiaVPN` (exe `KiaVPN.exe`, new installer AppId).
+- Telemetry removed: Sentry crash reporting has no DSN and is off by default; CI no longer passes any DSN.
+- Update checks / appcast / links point to `kiagram/kia-vpn` instead of Hiddify-owned endpoints.
+- Default routing region is **Iran** (`ir`) — Iranian sites bypass the tunnel.
+- CI: builds Windows/Android/macOS without any Hiddify-owned secrets (no Apple/Microsoft signing, no
+  Sentry, Google Play, TestFlight, winget, MSIX); stale/winget/signing workflows removed; APKs are signed
+  with this fork's own key; `hiddify-core` submodule URL switched to HTTPS (CI downloads prebuilt core libs).
+
+<div dir="rtl">
+
+## کیا وی‌پی‌ان (فارسی)
+
+**کیا وی‌پی‌ان** نسخه‌ی شخصی، غیرتجاری و تغییر نام‌یافته‌ی برنامه‌ی متن‌باز
+[Hiddify](https://github.com/hiddify/hiddify-app) است. تمام اعتبار نرم‌افزار متعلق به تیم Hiddify است و
+مجوز آن GPLv3 به‌همراه شرایط تکمیلی Hiddify است ([LICENSE.md](LICENSE.md)).
+
+**نحوه‌ی استفاده:**
+۱. برنامه را از بخش [Releases](https://github.com/kiagram/kia-vpn/releases) دانلود و نصب کنید.
+۲. لینک اشتراک (subscription) شخصی خود را کپی کنید و در برنامه **+** ← «افزودن از کلیپ‌بورد» (یا اسکن QR) را بزنید.
+۳. دکمه‌ی **اتصال** را بزنید؛ برنامه خودش بهترین مسیرِ کارکننده را انتخاب می‌کند و سایت‌های ایرانی مستقیم باز می‌شوند.
+
+هیچ سرور یا لینک اشتراکی داخل برنامه نیست؛ همیشه لینک خودتان را اضافه می‌کنید.
+
+</div>
+
+<a id="privacy"></a>
+### Privacy
+Kia VPN sends no analytics or crash reports. Network traffic only goes to the servers in the subscription you add
+(and to GitHub when checking for app updates).
+
+---
+
+> The original Hiddify README follows below for reference.
+
 <div dir="ltr" align=center>
     
 [**![Lang_farsi](https://user-images.githubusercontent.com/125398461/234186932-52f1fa82-52c6-417f-8b37-08fe9250a55f.png) فارسی**](README_fa.md) / [**Русский 🇷🇺**](README_ru.md) / [**简体中文 🇨🇳**](README_cn.md) / [**日本語 🇯🇵**](README_ja.md) / [**Portugês-BR 🇧🇷**](README_br.md)

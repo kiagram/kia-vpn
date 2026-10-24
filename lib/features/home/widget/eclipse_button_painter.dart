@@ -561,87 +561,41 @@ class _Ctx {
 }
 
 // ---------------------------------------------------------------------------------------------
-// The Hi logo, from assets/images/logo.svg, in its 64 × 64 units, in four parts: the short bar with
-// the crossbar, the tall bar, the stem and the dot
-
-Path _svgPath(String d) {
-  final path = Path();
-  final tokens = RegExp(r'[MCLVHZ]|-?\d*\.?\d+').allMatches(d).map((m) => m.group(0)!).toList();
-  var i = 0;
-  var cmd = '';
-  var x = 0.0;
-  var y = 0.0;
-  double n() => double.parse(tokens[i++]);
-  while (i < tokens.length) {
-    if (RegExp('[A-Z]').hasMatch(tokens[i])) cmd = tokens[i++];
-    switch (cmd) {
-      case 'M':
-        x = n();
-        y = n();
-        path.moveTo(x, y);
-        cmd = 'L';
-      case 'L':
-        x = n();
-        y = n();
-        path.lineTo(x, y);
-      case 'H':
-        x = n();
-        path.lineTo(x, y);
-      case 'V':
-        y = n();
-        path.lineTo(x, y);
-      case 'C':
-        final x1 = n();
-        final y1 = n();
-        final x2 = n();
-        final y2 = n();
-        x = n();
-        y = n();
-        path.cubicTo(x1, y1, x2, y2, x, y);
-      case 'Z':
-        path.close();
-    }
-  }
-  return path;
-}
+// The Kia VPN "Ki" mark, matching assets/images/logo.svg, in its 64 × 64 units, in four parts: the K's
+// bar, the K's arms, the i's stem and the i's dot
 
 abstract final class _HiLogo {
-  static final dot = _svgPath(
-    'M47.1582 14.4283C47.1582 13.8368 47.4684 13.2886 47.9757 12.9842L61.4494 4.89891C62.5721 4.22529 64.0003 '
-    '5.03389 64.0003 6.34306V20.2103C64.0003 21.1405 63.2461 21.8945 62.3161 21.8945H48.8424C47.9124 21.8945 '
-    '47.1582 21.1405 47.1582 20.2103V14.4283Z',
-  );
+  // Kia VPN "Ki" mark: the K's bar, the K's arms, the i's stem and the i's dot.
+  static final dot = Path()..addOval(Rect.fromCircle(center: const Offset(52.1, 14.5), radius: 7.4));
 
-  static final h = _svgPath(
-    'M24.3966 26.4593C23.8893 26.7637 23.5789 27.3118 23.5789 27.9034V43.7921L23.5789 45.4751L23.5789 45.4763L23.5789 '
-    '48.0001C23.5789 48.9301 22.8249 49.6001 21.8947 49.6001H18.5263C17.5962 49.6001 16.8421 48.9301 16.8421 48.0001V '
-    '45.4751V34.976C16.8421 33.6669 15.4139 32.8583 14.2913 33.5319L0.817607 41.6171C0.310362 41.9216 0 42.4696 0 '
-    '43.0615V60.6342C0 61.5642 0.754048 62.3184 1.68421 62.3184H15.1579C16.0881 62.3184 16.8421 61.5642 16.8421 '
-    '60.6342V58.9488V56.8314C16.8421 55.9011 17.5962 55.3376 18.5263 55.3376H21.8947C22.8249 55.3376 23.5789 55.9011 '
-    '23.5789 56.8314V58.9488L23.5789 60.6342C23.5789 61.5642 24.333 62.3184 25.2632 62.3184H38.7368C39.6669 62.3184 '
-    '40.4211 61.5642 40.4211 60.6342V45.4763V43.7921V19.8182C40.4211 18.509 38.9928 17.7004 37.8701 18.374L24.3966 '
-    '26.4593Z',
-  )..fillType = PathFillType.evenOdd;
+  static final h = (Path()
+        ..addRRect(RRect.fromLTRBR(3.5, 8, 17.5, 62.3, const Radius.circular(1.7)))
+        ..addPolygon(const [
+          Offset(20.1, 31),
+          Offset(31.5, 8),
+          Offset(40.5, 8),
+          Offset(28, 35),
+          Offset(41, 62.3),
+          Offset(32, 62.3),
+          Offset(20.1, 39),
+        ], true))
+    ..fillType = PathFillType.evenOdd;
 
-  static final stem = _svgPath(
-    'M47.1592 28.7999V60.7999C47.1592 61.6836 47.9132 62.3999 48.8434 62.3999H62.3171C63.2472 62.3999 64.0013 61.6836 '
-    '64.0013 60.7999V28.7999C64.0013 27.9162 63.2472 27.1999 62.3171 27.1999H48.8434C47.9132 27.1999 47.1592 27.9162 '
-    '47.1592 28.7999Z',
-  );
+  static final stem = Path()..addRRect(RRect.fromLTRBR(43.7, 27.2, 60.5, 62.4, const Radius.circular(1.7)));
 
   static final all = Path.combine(PathOperation.union, Path.combine(PathOperation.union, h, stem), dot);
 
   static Path pathOf(int part) => part < 2 ? h : (part == 2 ? stem : dot);
 
   static Rect clipOf(int part) => switch (part) {
-    0 => const Rect.fromLTRB(-2, -2, 23.58, 66),
-    1 => const Rect.fromLTRB(23.58, -2, 42, 66),
+    0 => const Rect.fromLTRB(-2, -2, 19.8, 66),
+    1 => const Rect.fromLTRB(19.8, -2, 42.5, 66),
     _ => const Rect.fromLTRB(-2, -2, 66, 66),
   };
 
-  static const tops = [32.9, 18.2, 27.2, 4.2];
-  static const bottoms = [62.32, 62.32, 62.4, 21.9];
-  static const centersX = [8.4, 32.0, 55.6, 55.6];
+  static const tops = [8.0, 8.0, 27.2, 7.1];
+  static const bottoms = [62.3, 62.3, 62.4, 21.9];
+  static const centersX = [10.5, 30.3, 52.1, 52.1];
 
   /// The signal bar each part belongs to: the stem and the dot are the third.
   static const bar = [0, 1, 2, 2];

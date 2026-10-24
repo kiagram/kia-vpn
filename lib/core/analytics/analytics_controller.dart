@@ -19,7 +19,8 @@ bool _testCrashReport = false;
 class AnalyticsController extends _$AnalyticsController with AppLogger {
   @override
   Future<bool> build() async {
-    return _preferences.getBool(enableAnalyticsPrefKey) ?? true;
+    // Kia VPN: crash reporting is opt-in and has no DSN configured (telemetry disabled).
+    return _preferences.getBool(enableAnalyticsPrefKey) ?? false;
   }
 
   SharedPreferences get _preferences => ref.read(sharedPreferencesProvider).requireValue;
@@ -34,7 +35,8 @@ class AnalyticsController extends _$AnalyticsController with AppLogger {
 
       // final env = ref.read(environmentProvider);
       // final appInfo = await ref.read(appInfoProvider.future);
-      final dsn = !kDebugMode || _testCrashReport ? Environment.sentryDSN : "";
+      // Kia VPN: never send crash reports to a third party; an empty DSN disables Sentry.
+      const dsn = "";
       logEnableSentry();
 
       await SentryFlutter.init((options) {

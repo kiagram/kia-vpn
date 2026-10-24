@@ -1,6 +1,6 @@
 {
   "common": {
-    "appTitle": "هیدیفای",
+    "appTitle": "کیا وی‌پی‌ان",
     "start": "شروع",
     "version": "نسخه",
     "ok": "باشه",
@@ -98,7 +98,7 @@
   "intro": {
     "banner": "هرآنچه برای اینترنت بدون محدودیت نیاز دارید",
     "termsAndPolicyCaution(rich)": "با ادامه، شما با ${tap(@:pages.about.termsAndConditions)} موافقت می‌کنید",
-    "info(rich)": "ساخته شده با ❤️ توسط هیدیفای. ${tap_source(متن‌باز)} و ${tap_license(مجوز)}"
+    "info(rich)": "کیا وی‌پی‌ان بر پایه‌ی برنامه‌ی Hiddify ساخته شده است (GPLv3). ${tap_source(متن‌باز)} و ${tap_license(مجوز)}"
   },
   "pages": {
     "home": {

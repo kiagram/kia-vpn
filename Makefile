@@ -284,7 +284,7 @@ android-aab-release:
 	  --build-dart-define=sentry_dsn=$(SENTRY_DSN) \
 	  --build-dart-define=release=google-play
 
-windows-release: windows-zip-release windows-exe-release windows-msix-release
+windows-release: windows-zip-release windows-exe-release
 
 windows-zip-release:
 	fastforge package \
@@ -302,15 +302,15 @@ windows-zip-release:
 	$(YELLOW)Post-processing Windows portable$(DONE); \
 	cd "$$ZIP_DIR"; \
 	$(BLUE)Extracting and Repacking...$(DONE); \
-	mkdir -p Hiddify; \
-	unzip -q "$$ZIP_FILE" -d Hiddify/; \
+	mkdir -p KiaVPN; \
+	unzip -q "$$ZIP_FILE" -d KiaVPN/; \
 	rm "$$ZIP_FILE"; \
 	if command -v 7z > /dev/null 2>&1; then \
-	  7z a -tzip -bso0 -bsp0 "$$FILE_NAME.zip" Hiddify; \
+	  7z a -tzip -bso0 -bsp0 "$$FILE_NAME.zip" KiaVPN; \
 	else \
-	  pwsh -NoProfile -Command "Compress-Archive -Path Hiddify -DestinationPath '$$FILE_NAME.zip' -Force"; \
+	  pwsh -NoProfile -Command "Compress-Archive -Path KiaVPN -DestinationPath '$$FILE_NAME.zip' -Force"; \
 	fi; \
-	rm -rf Hiddify; \
+	rm -rf KiaVPN; \
 	$(GREEN)Successful$(DONE)
 
 windows-exe-release:
